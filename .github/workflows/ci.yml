@@ -13,8 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Build Docker Image
-        run: docker build -t ci-cd-playground .
+      - name: Login to Dockerhub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker logn -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
       
-      - name: Run Docker Container
-        run: docker run ci-cd-playground
+      - name: Build Docker Image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/ci-cd-playground:latest .
+      
+      - name: Push Docker Image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/ci-cd-playground:latest
