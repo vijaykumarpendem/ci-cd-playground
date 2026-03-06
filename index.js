@@ -1,1 +1,1 @@
-console.log('Hello Vijay!!!')
+console.log('App running inside CI pipeline')
